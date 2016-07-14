@@ -12,8 +12,14 @@ import java.awt.event.KeyListener;
 
 public class SnakeBlock extends JPanel implements KeyListener {
 	
+	enum Direction {
+		LEFT, RIGHT, UP, DOWN
+	};
+	//默认方向为向右
+	Direction direction = Direction.RIGHT;
+	
 	int x = 150,y = 150;
-	String direction = "right";
+//	String direction = "right";
 	private static final int BLOCK_SIZE = 10;
 	
 
@@ -47,22 +53,22 @@ public class SnakeBlock extends JPanel implements KeyListener {
     
         case KeyEvent.VK_RIGHT:
 //            forward = Direction.right;
-        	direction = "right";
+        	direction = Direction.RIGHT;
             break;
             
         case KeyEvent.VK_LEFT:
 //            forward = Direction.left;
-        	direction = "left";
+        	direction = Direction.LEFT;
             break;
             
         case KeyEvent.VK_UP:
 //        	forward = Direction.up;
-        	direction = "up";
+        	direction = Direction.UP;
         	break;
         	
         case KeyEvent.VK_DOWN:
 //        	forward = Direction.down;
-        	direction = "down";
+        	direction = Direction.DOWN;
         	break;
         	
         }
@@ -122,16 +128,16 @@ public class SnakeBlock extends JPanel implements KeyListener {
     class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
         	switch (direction) {
-        	case "up":
+        	case UP:
         		up();
         	break;
-        	case "down":
+        	case DOWN:
         		down();
         	break;
-        	case "left":
+        	case LEFT:
         		left();
         	break;
-        	case "right":
+        	case RIGHT:
         		right();
         	break;
         	}
