@@ -10,9 +10,7 @@ import java.awt.event.KeyListener;
 
 public class SnakeBlock extends JPanel implements KeyListener {
 	
-	enum Direction {
-		LEFT, RIGHT, UP, DOWN
-	};
+	enum Direction {LEFT, RIGHT, UP, DOWN};
 	//默认方向为向右
 	Direction direction = Direction.RIGHT;
 	Timer timer;
@@ -21,10 +19,12 @@ public class SnakeBlock extends JPanel implements KeyListener {
 	//两个数组snakeX,snakeY分别储存蛇的X和Y坐标,坐标的取值必须时10的倍数
 	int[] snakeX = new int[30];
 	int[] snakeY = new int[30];
-	private static final int BLOCK_SIZE = 5;
+	private static final int BLOCK_SIZE = 10;
 	Food food;
+	Game game;
 	//食物XY坐标
 	int foodX, foodY;
+	int score = 0;
 	
 
     public SnakeBlock() {
@@ -39,11 +39,13 @@ public class SnakeBlock extends JPanel implements KeyListener {
         snakeY[3] = 150;
         //初始化食物的XY坐标
         food = new Food();
+        
         foodX = food.getX();
         foodY = food.getY();
+        game = new Game();
         //开始计数器
-    	timer = new Timer(100, new TimerListener());
-        timer.start();
+//    	timer = new Timer(100, new TimerListener());
+//        timer.start();
 	}
     
     @Override
@@ -108,7 +110,7 @@ public class SnakeBlock extends JPanel implements KeyListener {
 	
 	public void gameOver(){
 		System.out.println("you lost");
-		JOptionPane.showMessageDialog(null, "GAME OVER");
+		JOptionPane.showMessageDialog(null, "GAME OVER!! Your score:" + score );
 		timer.stop();
 	}
 
@@ -124,7 +126,6 @@ public class SnakeBlock extends JPanel implements KeyListener {
 			isDie = true;
 			return isDie;
 		}
-		
 //		//如果头碰到自身，返回true
     	switch(d) {
     	case UP:
@@ -191,6 +192,7 @@ public class SnakeBlock extends JPanel implements KeyListener {
 			repaint();	
 			if (eat(snakeX[0], snakeY[0], foodX, foodY)) {
 				length++;
+				game.addScore();
 	        	foodX = food.newPosition(snakeX);
 	        	foodY = food.newPosition(snakeY);
 				repaint();
@@ -210,6 +212,7 @@ public class SnakeBlock extends JPanel implements KeyListener {
 			repaint();
 			if (eat(snakeX[0], snakeY[0], foodX, foodY)) {
 				length++;
+				game.addScore();
 	        	foodX = food.newPosition(snakeX);
 	        	foodY = food.newPosition(snakeY);
 				repaint();
@@ -229,6 +232,7 @@ public class SnakeBlock extends JPanel implements KeyListener {
 			repaint();
 			if (eat(snakeX[0], snakeY[0], foodX, foodY)) {
 				length++;
+				game.addScore();
 	        	foodX = food.newPosition(snakeX);
 	        	foodY = food.newPosition(snakeY);
 				repaint();
@@ -248,6 +252,7 @@ public class SnakeBlock extends JPanel implements KeyListener {
 			repaint();
 			if (eat(snakeX[0], snakeY[0], foodX, foodY)) {
 				length++;
+				game.addScore();
 	        	foodX = food.newPosition(snakeX);
 	        	foodY = food.newPosition(snakeY);
 				repaint();
@@ -255,33 +260,29 @@ public class SnakeBlock extends JPanel implements KeyListener {
 		}
 	}
 	
-    class TimerListener implements ActionListener {
-    	
-    	@Override
-        public void actionPerformed(ActionEvent e) {
-        	switch(direction) {
-        	case UP:
-        		up();
-        	break;
-        	
-        	case DOWN:
-        		down();
-        	break;
-        	
-        	case LEFT:
-        		left();
-        	break;
-        	
-        	case RIGHT:
-        		right();
-        	break;
-        	} 
-        	
-        	//try food
-//        	foodX = food.newPosition(snakeX);
-//        	foodY = food.newPosition(snakeY);
-//        	System.out.println("(X:Y)=(" + foodX + ":" + foodY + ")");
-        }
-    }
+//    class TimerListener implements ActionListener {
+//    	
+//    	@Override
+//        public void actionPerformed(ActionEvent e) {
+//        	switch(direction) {
+//        	case UP:
+//        		up();
+//        	break;
+//        	
+//        	case DOWN:
+//        		down();
+//        	break;
+//        	
+//        	case LEFT:
+//        		left();
+//        	break;
+//        	
+//        	case RIGHT:
+//        		right();
+//        	break;
+//        	} 
+//        	
+//        }
+//    }
 	
 }
