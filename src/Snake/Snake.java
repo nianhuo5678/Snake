@@ -24,7 +24,7 @@ public class Snake extends JPanel {
 		this.direction = direction;
 	}
 	public Snake(Direction direction, int length) {
-		super();
+//		super();
 		this.direction = direction;
 		this.length = length;
 		game = new Game();
@@ -41,8 +41,8 @@ public class Snake extends JPanel {
         snakeY[3] = 150;
 	}
 	//根据方向移动整条蛇的坐标
-	public void move(int[] snakeX, int[] snakeY) {
-		if ( this.die(snakeX, snakeY, direction) ) {
+	public void move() {
+		if ( this.die(this.snakeX, this.snakeY, this.direction) ) {
 			game.over();
 		}
 		else {
@@ -80,7 +80,13 @@ public class Snake extends JPanel {
 			snakeY[i] = snakeY[i-1];
 		}
 	}
-	
+	//判断是否能吃食物
+	public boolean eat(int snakeX, int snakeY, int foodX, int foodY) {
+		if (snakeX == foodX && snakeY == foodY)
+			return true;
+		else
+			return false;
+	}
 	//判断蛇是否死
 	public boolean die(int snakeX[], int snakeY[], Direction d) {
 		boolean isDie = true;

@@ -77,7 +77,6 @@ public class SnakeBlock extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
         switch (e.getKeyCode()) {
-    
         case KeyEvent.VK_RIGHT:
         	if (direction == Direction.UP || direction == Direction.DOWN) {
         		direction = Direction.RIGHT;
