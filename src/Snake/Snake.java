@@ -9,11 +9,17 @@ public class Snake extends JPanel {
 	private int length;//蛇的长度
 	public int[] snakeX, snakeY;//两个数组分别记录蛇在X和Y坐标的位置
 	private static final int BLOCK_SIZE = 10;
-	private Game game;
+//	private Game game;
     private Food food;
+    
+	public int addLength() {
+		return length + 1 ;
+	}
+	
 	public int getLength() {
 		return length;
 	}
+
 	public void setLength(int length) {
 		this.length = length;
 	}
@@ -27,7 +33,6 @@ public class Snake extends JPanel {
 //		super();
 		this.direction = direction;
 		this.length = length;
-		game = new Game();
 		snakeX = new int[30];
 		snakeY = new int[30];
     	//初始化蛇的X,Y坐标
@@ -42,36 +47,22 @@ public class Snake extends JPanel {
 	}
 	//根据方向移动整条蛇的坐标
 	public void move() {
-		if ( this.die(this.snakeX, this.snakeY, this.direction) ) {
-			game.over();
-		}
-		else {
-			//把蛇身向蛇头方向移动一格，再根据方向，设置蛇头的新位置
-			this.follow(snakeX, snakeY);
-	    	switch(this.direction) {
-	    	case UP:
-	    		snakeY[0] = snakeY[0] - BLOCK_SIZE;
-	    	break;
-	    	case DOWN:
-	    		snakeY[0] = snakeY[0] + BLOCK_SIZE;
-	    	break;
-	    	case LEFT:
-	    		snakeX[0] = snakeX[0] - BLOCK_SIZE;
-	    	break;
-	    	case RIGHT:
-	    		snakeX[0] = snakeX[0] + BLOCK_SIZE;
-	    	break;
-	    	} 
-			repaint();	
-			if (eat(snakeX[0], snakeY[0], food.getX(), food.getY())) {
-				length++;
-				game.addScore();
-				//重置食物的XY坐标
-	        	food.setX(food.newPosition(snakeX));
-	        	food.setX(food.newPosition(snakeY));
-				repaint();
-			}
-		}
+		//把蛇身向蛇头方向移动一格，再根据方向，设置蛇头的新位置
+		this.follow(snakeX, snakeY);
+	    switch(this.direction) {
+	    case UP:
+	    	snakeY[0] = snakeY[0] - BLOCK_SIZE;
+	    break;
+	    case DOWN:
+	    	snakeY[0] = snakeY[0] + BLOCK_SIZE;
+	    break;
+	    case LEFT:
+	    	snakeX[0] = snakeX[0] - BLOCK_SIZE;
+	    break;
+	    case RIGHT:
+	    	snakeX[0] = snakeX[0] + BLOCK_SIZE;
+	    break;
+	    } 
 	}
 	//蛇身跟随蛇头移动
 	public void follow(int[] snakeX, int[] snakeY) {
