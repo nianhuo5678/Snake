@@ -12,8 +12,8 @@ public class Snake extends JPanel {
 //	private Game game;
     private Food food;
     
-	public int addLength() {
-		return length + 1 ;
+	public void addLength() {
+		this.length = this.length + 1;
 	}
 	
 	public int getLength() {

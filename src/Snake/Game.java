@@ -44,7 +44,7 @@ public class Game extends JPanel implements KeyListener {
 	//游戏结束的方法
 	public void over(){
 		timer.stop();
-		JOptionPane.showMessageDialog(null, "GAME OVER!! Your score:" + score );
+		JOptionPane.showMessageDialog(null, "GAME OVER!! Your score:" + this.score );
 		System.out.println("GAME OVER Your score: " + this.score );
 	}
 	
@@ -122,6 +122,8 @@ public class Game extends JPanel implements KeyListener {
         }
         //打印食物
         g.fillRect(food.getX(), food.getY(), BLOCK_SIZE, BLOCK_SIZE);
+        //打印分数
+        g.drawString("score="+ this.score, 300, 10);
     }
     
     class TimerListener implements ActionListener {
