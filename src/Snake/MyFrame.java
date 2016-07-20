@@ -18,7 +18,7 @@ public class MyFrame  extends JFrame{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MyFrame snakeFrame = new MyFrame();
-		snakeFrame.setSize(320, 350);
+		snakeFrame.setSize(400, 350);
 		snakeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		snakeFrame.setVisible(true);
 	}
